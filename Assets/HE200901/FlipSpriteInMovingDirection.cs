@@ -4,17 +4,26 @@ public class FlipSpriteInMovingDirection : MonoBehaviour
 {
     private float previous_x = 0;
     public bool DefaultFacingDirectionIsRight = true;
+    private bool _current_facing_direction = true;
+    public bool GetCurrentFacingDirection()
+    {
+        return _current_facing_direction;
+    }
 
     void Update()
     {
         float current_x = gameObject.transform.position.x;
-        if(current_x > previous_x)
+        if (current_x > previous_x)
         {
             // moving right
             FaceRight();
-        }else if(current_x < previous_x)        {
+            _current_facing_direction = true;
+        }
+        else if (current_x < previous_x)
+        {
             // moving left
             FaceLeft();
+            _current_facing_direction = false;
         }
         previous_x = current_x;
     }

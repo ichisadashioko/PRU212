@@ -44,14 +44,30 @@ public class FireBulletOnSpace : MonoBehaviour
                 Vector2 attackDirection = Vector2.left;
 
                 // TODO check facing direction
-                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                var _tmp = GetComponent<FlipSpriteInMovingDirection>();
+                if (_tmp == null)
                 {
-                    attackDirection = Vector2.left;
+                    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        attackDirection = Vector2.left;
+                    }
+                    else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                    {
+                        attackDirection = Vector2.right;
+                    }
                 }
-                else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                else
                 {
-                    attackDirection = Vector2.right;
+                    if (_tmp.GetCurrentFacingDirection())
+                    {
+                        attackDirection = Vector2.right;
+                    }
+                    else
+                    {
+                        attackDirection = Vector2.left;
+                    }
                 }
+
 
                 // TODO change fire speed with weapon level
                 float move_speed = 5f;

@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 1273394911}
   - component: {fileID: 1273394914}
   - component: {fileID: 1273394915}
+  - component: {fileID: 1273394916}
   m_Layer: 0
   m_Name: pikachu_player
   m_TagString: Player
@@ -774,6 +775,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultFacingDirectionIsRight: 1
+--- !u!114 &1273394916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273394910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e56e233c05ea71478a756cac8fed492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet_prefab_name: Star_Wrath_Bullet
+  bullet_prefab: {fileID: 0}
 --- !u!1 &1997190619
 GameObject:
   m_ObjectHideFlags: 3
@@ -869,63 +884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &7568401346405338852
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 529566815055839525, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_Name
-      value: Star_Wrath_projectile_0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.1128693
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.0297543
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4898192300381870663, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9d07e8ad71ca38742aec06372aed8443, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -936,4 +894,3 @@ SceneRoots:
   - {fileID: 1273394913}
   - {fileID: 75227622}
   - {fileID: 509457306}
-  - {fileID: 7568401346405338852}
