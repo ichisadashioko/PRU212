@@ -6,7 +6,42 @@ public class ObjectPoolManager : MonoBehaviour
 {
     public static List<GameObjectPoolInfo> ALL_OBJECT_POOL_LIST = new List<GameObjectPoolInfo>();
 
-    public static GameObject SpawnNewGameObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation)
+    public enum PoolType
+    {
+        Bullet,
+        None
+    }
+
+    public static PoolType PoolingType;
+
+    private static GameObject _bullet_game_object_holder;
+    private static GameObject _other_game_object_holder;
+
+    private static void setup_empty_game_objects_to_hold_pooled_objects()
+    {
+        _bullet_game_object_holder = new GameObject("bullet_game_object_pool");
+        _other_game_object_holder = new GameObject("other_game_object_pool");
+    }
+
+    private static GameObject set_parent_object(PoolType pool_type)
+    {
+        if(_bullet_game_object_holder == null)
+        {
+            setup_empty_game_objects_to_hold_pooled_objects();
+        }
+
+        switch (pool_type)
+        {
+            case PoolType.Bullet:
+                return _bullet_game_object_holder;
+            case PoolType.None:
+                return _other_game_object_holder;
+            default:
+                return null;
+        }
+    }
+
+    public static GameObject SpawnNewGameObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
     {
         GameObjectPoolInfo pool = null;
         foreach (GameObjectPoolInfo p in ALL_OBJECT_POOL_LIST)
@@ -36,7 +71,12 @@ public class ObjectPoolManager : MonoBehaviour
 
         if (spawnableObj == null)
         {
+            GameObject _parent_object = set_parent_object(poolType);
             spawnableObj = Instantiate(objectToSpawn, spawnPosition, spawnRotation);
+            if (_parent_object != null)
+            {
+                spawnableObj.transform.SetParent(_parent_object.transform);
+            }
         }
         else
         {

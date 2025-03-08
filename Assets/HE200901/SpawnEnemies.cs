@@ -10,7 +10,9 @@ public class SpawnEnemies : MonoBehaviour
         
     }
 
-    public GameObject obj_to_spawn_prefab;
+    public string enemey_prefab_name = "mob";
+
+    private GameObject obj_to_spawn_prefab;
     public static int max_spawn_count = 10;
     public static int current_spawned_obj_count = 0;
     public float spawn_interval_secs = 0.5f;
@@ -23,6 +25,11 @@ public class SpawnEnemies : MonoBehaviour
         if (last_spawn_delta_time_secs > spawn_interval_secs)
         {
             last_spawn_delta_time_secs = 0;
+            if(obj_to_spawn_prefab == null)
+            {
+                obj_to_spawn_prefab = Resources.Load<GameObject>(enemey_prefab_name);
+            }
+
             if (obj_to_spawn_prefab != null)
             {
                 if (current_spawned_obj_count < max_spawn_count)

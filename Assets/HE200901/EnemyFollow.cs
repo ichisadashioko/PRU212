@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public float speed = 5f; // Speed at which the object moves
+    public float speed = 1f; // Speed at which the object moves
     private Transform target; // Target to follow
 
     void Start()
