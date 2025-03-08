@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b7cfdead9c6a4a8e946afafe4e2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj_to_spawn_prefab: {fileID: 6500216932231333223, guid: ef4980d766540294cb74445f1fe862f5, type: 3}
+  enemey_prefab_name: mob
   spawn_interval_secs: 0.5
 --- !u!114 &1014126329
 MonoBehaviour:
@@ -657,6 +657,7 @@ GameObject:
   - component: {fileID: 1273394912}
   - component: {fileID: 1273394911}
   - component: {fileID: 1273394914}
+  - component: {fileID: 1273394915}
   m_Layer: 0
   m_Name: pikachu_player
   m_TagString: Player
@@ -760,6 +761,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max_hp: 90
+--- !u!114 &1273394915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273394910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b701e3e3ac22f74381cdc3ed95bfe6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultFacingDirectionIsRight: 1
 --- !u!1 &1997190619
 GameObject:
   m_ObjectHideFlags: 3
