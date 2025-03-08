@@ -13,7 +13,7 @@ public class SpawnEnemies : MonoBehaviour
     public string enemey_prefab_name = "mob";
 
     private GameObject obj_to_spawn_prefab;
-    public static int max_spawn_count = 10;
+    public static int max_spawn_count = 100;
     public static int current_spawned_obj_count = 0;
     public float spawn_interval_secs = 0.5f;
     private float last_spawn_delta_time_secs = 0;
