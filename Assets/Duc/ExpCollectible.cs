@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Drawing;
-
-public class RemovedOnTouchPlayer : MonoBehaviour
+public class ExpCollectible : MonoBehaviour
 {
-    public GameObject player;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +9,7 @@ public class RemovedOnTouchPlayer : MonoBehaviour
     }
     public float update_interval = 0.1f;
     private float last_update_delta_time = 0;
+    private GameObject player;
 
     // Update is called once per frame
     void Update()
@@ -22,10 +18,13 @@ public class RemovedOnTouchPlayer : MonoBehaviour
         if (last_update_delta_time > update_interval)
         {
             last_update_delta_time = 0;
+            if(player == null){
+                // TODO drop exp on death
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
 
             if (player != null)
             {
-
                 Vector3 player_position = player.transform.position;
                 Vector3 player_size = player.GetComponent<SpriteRenderer>().bounds.size;
 
@@ -44,8 +43,6 @@ public class RemovedOnTouchPlayer : MonoBehaviour
                 float gameObject_bottom_y = gameObject_position.y + gameObject_size.y / 2;
 
                 Rect player_rect = new Rect(player_left_x, player_top_y, player_size.x, player_size.y);
-                //player_rect.
-                //Rect.Inter
                 int int_scale = 1000;
                 Rectangle player_rectangle = new Rectangle((int)(player_left_x * int_scale), (int)(player_top_y * int_scale), (int)(player_size.x * int_scale), (int)(player_size.y * int_scale));
                 //Rectangle gameObject_rectangle = new Rectangle((int)(player_left_x * int_scale), (int)(player_top_y * int_scale), (int)(player_size.x * int_scale), (int)(player_size.y * int_scale));
@@ -53,38 +50,8 @@ public class RemovedOnTouchPlayer : MonoBehaviour
                 if (!Rectangle.Intersect(player_rectangle, gameObject_rectangle).IsEmpty)
                 {
                     ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    SpawnEnemies.current_spawned_obj_count -= 1;
-                    var player_hp_state = player.GetComponent<PlayerHP>();
-                    if (player_hp_state != null)
-                    {
-                        player_hp_state.on_hit(1);
-                    }
-                    Die();
                 }
             }
-        }
-    }
-    private void Die()
-    {
-        DropExp();
-        ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-
-    }
-
-    private GameObject expPrefab;
-
-    private void DropExp()
-    {
-        if (expPrefab == null)
-        {
-            expPrefab = Resources.Load<GameObject>("duc_exp_prefab");
-        }
-
-        if (expPrefab != null)
-        {
-            Vector3 dropPosition = transform.position + new Vector3(0, 0.5f, 0);
-            // Instantiate(expPrefab, dropPosition, Quaternion.identity);
-            ObjectPoolManager.SpawnNewGameObject(expPrefab, dropPosition, Quaternion.identity);
         }
     }
 }

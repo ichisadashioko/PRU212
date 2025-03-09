@@ -1,12 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Drawing;
 
-public class RemovedOnTouchPlayer : MonoBehaviour
+public class TmpDeathOnTouchingBullet : MonoBehaviour
 {
-    public GameObject player;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +21,12 @@ public class RemovedOnTouchPlayer : MonoBehaviour
         {
             last_update_delta_time = 0;
 
-            if (player != null)
+            var bullet_list = GameObject.FindGameObjectsWithTag("bullet");
+            for (int i = 0; i < bullet_list.Length; i++)
             {
-
-                Vector3 player_position = player.transform.position;
-                Vector3 player_size = player.GetComponent<SpriteRenderer>().bounds.size;
+                GameObject bullet = bullet_list[i];
+                Vector3 player_position = bullet.transform.position;
+                Vector3 player_size = bullet.GetComponent<SpriteRenderer>().bounds.size;
 
                 float player_left_x = player_position.x - player_size.x / 2;
                 float player_right_x = player_position.x + player_size.x / 2;
@@ -54,11 +53,6 @@ public class RemovedOnTouchPlayer : MonoBehaviour
                 {
                     ObjectPoolManager.ReturnGameObjectToPool(gameObject);
                     SpawnEnemies.current_spawned_obj_count -= 1;
-                    var player_hp_state = player.GetComponent<PlayerHP>();
-                    if (player_hp_state != null)
-                    {
-                        player_hp_state.on_hit(1);
-                    }
                     Die();
                 }
             }

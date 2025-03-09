@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -3786435149749426583}
   - component: {fileID: -2264409720766719878}
   - component: {fileID: 4264216259199178022}
+  - component: {fileID: -3569745057896594643}
   m_Layer: 0
   m_Name: mob
   m_TagString: Untagged
@@ -193,3 +194,16 @@ MonoBehaviour:
   frame_0: {fileID: 0}
   frame_1: {fileID: 0}
   last_sprite: {fileID: 0}
+--- !u!114 &-3569745057896594643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500216932231333223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0261f3af20c9a354291e88edde5d62f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  update_interval: 0.1
