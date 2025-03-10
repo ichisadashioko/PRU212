@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8564027259800549847}
   m_Layer: 0
   m_Name: duc_exp_prefab
-  m_TagString: Untagged
+  m_TagString: ExpOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,4 +100,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9853fe623a23c694ca9d747bc43e6be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  experienceManager: {fileID: 0}
   update_interval: 0.1
