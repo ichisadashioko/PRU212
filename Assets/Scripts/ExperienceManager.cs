@@ -2,6 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public static class GameState
+{
+	public static int CURRENT_LEVEL = 0;
+}
+
 public class ExperienceManager : MonoBehaviour
 {
 	public static ExperienceManager Instance { get; private set; }
@@ -9,8 +14,9 @@ public class ExperienceManager : MonoBehaviour
 	[Header("Experience")]
 	[SerializeField] AnimationCurve experienceCurve;
 
-	int currentLevel, totalExperience;
+	int totalExperience;
 	int previousLevelsExperience, nextLevelsExperience;
+
 
 	[Header("Interface")]
 	[SerializeField] TextMeshProUGUI levelText;
@@ -45,7 +51,7 @@ public class ExperienceManager : MonoBehaviour
 	{
 		if (totalExperience >= nextLevelsExperience)
 		{
-			currentLevel++;
+            GameState.CURRENT_LEVEL++;
 			UpdateLevel();
 			// Hiệu ứng level up
 		}
@@ -53,8 +59,8 @@ public class ExperienceManager : MonoBehaviour
 
 	void UpdateLevel()
 	{
-		previousLevelsExperience = (int)experienceCurve.Evaluate(currentLevel);
-		nextLevelsExperience = (int)experienceCurve.Evaluate(currentLevel + 1);
+		previousLevelsExperience = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL);
+		nextLevelsExperience = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL + 1);
 		UpdateInterface();
 	}
 
@@ -63,7 +69,7 @@ public class ExperienceManager : MonoBehaviour
 		int start = totalExperience - previousLevelsExperience;
 		int end = nextLevelsExperience - previousLevelsExperience;
 
-		levelText.text = currentLevel.ToString();
+		levelText.text = GameState.CURRENT_LEVEL.ToString();
 		experienceText.text = start + " exp / " + end + " exp";
 		experienceFill.fillAmount = (float)start / (float)end;
 	}
