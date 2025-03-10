@@ -2,10 +2,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public static class GameState
-{
-	public static int CURRENT_LEVEL = 0;
-}
 
 public class ExperienceManager : MonoBehaviour
 {
