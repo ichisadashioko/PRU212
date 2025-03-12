@@ -49,6 +49,12 @@ public class SpawnEnemies : MonoBehaviour
                     Vector3 spawn_location = random_position_out_of_screen();
                     spawn_location.z = 0;
                     GameObject clone_obj = ObjectPoolManager.SpawnNewGameObject(obj_to_spawn_prefab, spawn_location, Quaternion.identity);
+
+                    var hp = clone_obj.GetComponent<HPForEnermy>();
+                    if(hp != null)
+                    {
+                        hp.reset_hp();
+                    }
                 }
 
                 //if (current_spawned_obj_count < max_spawn_count)
