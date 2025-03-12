@@ -60,8 +60,8 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
             {
                 if (CheckCollision(sword_list[i]))
                 {
-                    ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+                    //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
+                    //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     Die();
                     return;
                 }
@@ -72,8 +72,8 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
             {
                 if (CheckCollision(bullet_list[i]))
                 {
-                    ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+                    //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
+                    //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     Die();
                     return;
                 }
@@ -82,8 +82,10 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
     }
     private void Die()
     {
-        DropExp();
+        //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
+        SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
         ObjectPoolManager.ReturnGameObjectToPool(gameObject);
+        DropExp();
 
     }
 
