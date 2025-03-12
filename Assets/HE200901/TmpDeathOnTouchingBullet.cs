@@ -74,6 +74,7 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                 {
                     //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
                     //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+                    ObjectPoolManager.ReturnGameObjectToPool(bullet_list[i]);
                     Die();
                     return;
                 }
