@@ -112,46 +112,57 @@ public class AutoUseSkill : MonoBehaviour
                 return;
             }
 
-            GameObject bullet_obj = ObjectPoolManager.SpawnNewGameObject(bullet_prefab, gameObject.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Bullet);
-
-
-            var rb = bullet_obj.GetComponent<Rigidbody2D>();
-            if (rb != null)
+            for (int i = 0; i < gun_prop.Count; i++)
             {
-                Vector2 attackDirection = Vector2.left;
+                GameObject bullet_obj = ObjectPoolManager.SpawnNewGameObject(bullet_prefab, gameObject.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Bullet);
 
-                // TODO check facing direction
-                var _tmp = GetComponent<FlipSpriteInMovingDirection>();
-                if (_tmp == null)
+                var rb = bullet_obj.GetComponent<Rigidbody2D>();
+                if (rb != null)
                 {
-                    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                    Vector2 attackDirection = Vector2.left;
+
+                    // TODO check facing direction
+                    var _tmp = GetComponent<FlipSpriteInMovingDirection>();
+                    if (_tmp == null)
                     {
-                        attackDirection = Vector2.left;
-                    }
-                    else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                    {
-                        attackDirection = Vector2.right;
-                    }
-                }
-                else
-                {
-                    if (_tmp.GetCurrentFacingDirection())
-                    {
-                        attackDirection = Vector2.right;
+                        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                        {
+                            attackDirection = Vector2.left;
+                        }
+                        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                        {
+                            attackDirection = Vector2.right;
+                        }
                     }
                     else
                     {
-                        attackDirection = Vector2.left;
+                        if (_tmp.GetCurrentFacingDirection())
+                        {
+                            attackDirection = Vector2.right;
+                        }
+                        else
+                        {
+                            attackDirection = Vector2.left;
+                        }
                     }
+                    float angleSpread = 10f;
+                    var baseDirection = attackDirection;
+
+                    float angleOffset = (i - (gun_prop.Count - 1) / 2f) * angleSpread;
+
+                    // Rotate the base direction by the angle offset
+                    float angleInRadians = Mathf.Deg2Rad * angleOffset;  // Convert to radians
+                    attackDirection = new Vector2(
+                        baseDirection.x * Mathf.Cos(angleInRadians) - baseDirection.y * Mathf.Sin(angleInRadians),
+                        baseDirection.x * Mathf.Sin(angleInRadians) + baseDirection.y * Mathf.Cos(angleInRadians)
+                    );
+
+                    // TODO change fire speed with weapon level
+                    float move_speed = 5f;
+                    //rb.linearVelocity = Vector2.left * move_speed;
+                    rb.linearVelocity = attackDirection * move_speed;
                 }
-
-                // TODO change fire speed with weapon level
-                float move_speed = 5f;
-                //rb.linearVelocity = Vector2.left * move_speed;
-                rb.linearVelocity = attackDirection * move_speed;
             }
-
         }
-
     }
 }
