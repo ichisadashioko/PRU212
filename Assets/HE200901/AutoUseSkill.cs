@@ -11,6 +11,13 @@ public class SWORD_PROP
     public float CD { get; set; }
     public float Count { get; set; }
     public float Damage { get; set; }
+    public float RotationSpeed { get; set; }
+
+    public static SWORD_PROP GetSwordPropByLevel(int level)
+    {
+        //return new SWORD_PROP() { CD=Mathf.Max(0.1f, )}
+        return null;
+    }
 }
 
 public class GUN_PROP
