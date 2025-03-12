@@ -1040,6 +1040,7 @@ GameObject:
   - component: {fileID: 1273394915}
   - component: {fileID: 1273394916}
   - component: {fileID: 1273394917}
+  - component: {fileID: 1273394918}
   m_Layer: 0
   m_Name: pikachu_player
   m_TagString: Player
@@ -1216,6 +1217,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.2, y: 3.12}
   m_EdgeRadius: 0
+--- !u!114 &1273394918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273394910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35602d37c3ef014408501899ee8334f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CURRENT_GUN_CD: 1
+  bullet_prefab_name: Star_Wrath_Bullet
+  bullet_prefab: {fileID: 0}
 --- !u!1 &1420330570
 GameObject:
   m_ObjectHideFlags: 0

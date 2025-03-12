@@ -5,68 +5,68 @@ using UnityEngine.UI;
 
 public class ExperienceManager : MonoBehaviour
 {
-	public static ExperienceManager Instance { get; private set; }
+    public static ExperienceManager Instance { get; private set; }
 
-	[Header("Experience")]
-	[SerializeField] AnimationCurve experienceCurve;
+    [Header("Experience")]
+    [SerializeField] AnimationCurve experienceCurve;
 
-	int totalExperience;
-	int previousLevelsExperience, nextLevelsExperience;
+    int totalExperience;
+    int previousLevelsExperience, nextLevelsExperience;
 
 
-	[Header("Interface")]
-	[SerializeField] TextMeshProUGUI levelText;
-	[SerializeField] TextMeshProUGUI experienceText;
-	[SerializeField] Image experienceFill;
+    [Header("Interface")]
+    [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField] TextMeshProUGUI experienceText;
+    [SerializeField] Image experienceFill;
 
-	void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-		else
-		{
-			Destroy(gameObject); // Ngăn chặn trùng lặp
-		}
-	}
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Ngăn chặn trùng lặp
+        }
+    }
 
-	void Start()
-	{
-		UpdateLevel();
-	}
+    void Start()
+    {
+        UpdateLevel();
+    }
 
-	public void AddExperience(int amount)
-	{
-		totalExperience += amount;
-		CheckForLevelUp();
-		UpdateInterface();
-	}
+    public void AddExperience(int amount)
+    {
+        totalExperience += amount;
+        CheckForLevelUp();
+        UpdateInterface();
+    }
 
-	void CheckForLevelUp()
-	{
-		if (totalExperience >= nextLevelsExperience)
-		{
+    void CheckForLevelUp()
+    {
+        if (totalExperience >= nextLevelsExperience)
+        {
             GameState.CURRENT_LEVEL++;
-			UpdateLevel();
-			// Hiệu ứng level up
-		}
-	}
+            UpdateLevel();
+            // Hiệu ứng level up
+        }
+    }
 
-	void UpdateLevel()
-	{
-		previousLevelsExperience = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL);
-		nextLevelsExperience = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL + 1);
-		UpdateInterface();
-	}
+    void UpdateLevel()
+    {
+        previousLevelsExperience = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL);
+        nextLevelsExperience = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL + 1);
+        UpdateInterface();
+    }
 
-	void UpdateInterface()
-	{
-		int start = totalExperience - previousLevelsExperience;
-		int end = nextLevelsExperience - previousLevelsExperience;
+    void UpdateInterface()
+    {
+        int start = totalExperience - previousLevelsExperience;
+        int end = nextLevelsExperience - previousLevelsExperience;
 
-		levelText.text = GameState.CURRENT_LEVEL.ToString();
-		experienceText.text = start + " exp / " + end + " exp";
-		experienceFill.fillAmount = (float)start / (float)end;
-	}
+        levelText.text = GameState.CURRENT_LEVEL.ToString();
+        experienceText.text = start + " exp / " + end + " exp";
+        experienceFill.fillAmount = (float)start / (float)end;
+    }
 }
