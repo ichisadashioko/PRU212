@@ -75,7 +75,16 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                     //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
                     //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     ObjectPoolManager.ReturnGameObjectToPool(bullet_list[i]);
-                    Die();
+                    var gun_prop = GUN_PROP.GetGunPropByLevel(GameState.CURRENT_LEVEL);
+                    var hp_obj = gameObject.GetComponent<HPForEnermy>();
+                    if(hp_obj != null)
+					{
+                        hp_obj.HP = hp_obj.HP - gun_prop.Damage;
+                        if (hp_obj.HP <= 0)
+						{
+							Die();
+						}
+                    }
                     return;
                 }
             }
