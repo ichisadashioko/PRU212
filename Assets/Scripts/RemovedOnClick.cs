@@ -40,7 +40,7 @@ public class RemovedOnClick : MonoBehaviour
     {
         //Debug.Log("mousedown");
         ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-        SpawnEnemies.current_spawned_obj_count -= 1;
+        SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
     }
 
     //void OnMouseDown()

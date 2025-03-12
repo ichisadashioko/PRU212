@@ -53,7 +53,7 @@ public class RemovedOnTouchPlayer : MonoBehaviour
                 if (!Rectangle.Intersect(player_rectangle, gameObject_rectangle).IsEmpty)
                 {
                     ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    SpawnEnemies.current_spawned_obj_count -= 1;
+                    SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     var player_hp_state = player.GetComponent<PlayerHP>();
                     if (player_hp_state != null)
                     {

@@ -61,7 +61,7 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                 if (CheckCollision(sword_list[i]))
                 {
                     ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    SpawnEnemies.current_spawned_obj_count -= 1;
+                    SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     Die();
                     return;
                 }
@@ -73,7 +73,7 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                 if (CheckCollision(bullet_list[i]))
                 {
                     ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    SpawnEnemies.current_spawned_obj_count -= 1;
+                    SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     Die();
                     return;
                 }
