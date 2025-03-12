@@ -696,8 +696,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000014305, y: 0}
-  m_SizeDelta: {x: 29.8818, y: 50}
+  m_AnchoredPosition: {x: 0.5866, y: 3.4}
+  m_SizeDelta: {x: 61.972, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &658661090
 MonoBehaviour:
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273394910}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e56e233c05ea71478a756cac8fed492, type: 3}
   m_Name: 
