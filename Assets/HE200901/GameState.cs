@@ -1,4 +1,3 @@
-
 public static class GameState
 {
 	public static int CURRENT_LEVEL = 0;
