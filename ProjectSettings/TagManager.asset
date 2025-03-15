@@ -9,6 +9,7 @@ TagManager:
   - sword
   - health_bar_fill
   - health_bar_background
+  - safe_portal
   layers:
   - Default
   - TransparentFX

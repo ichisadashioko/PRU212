@@ -13,9 +13,9 @@ public class HealthBarMoveWithPlayer : MonoBehaviour
     public GameObject health_bar_fill;
     public GameObject health_bar_background;
     private float last_update_delta_time = 0;
-    public float update_interval = 0.001f;
+    private float update_interval = 0.001f;
 
-    public Vector3 offset = new Vector3(-0.5f, 0.7f, 0);
+    private Vector3 offset = new Vector3(-0.5f, 0.7f, 0);
 
     // Update is called once per frame
     void Update()
