@@ -889,6 +889,7 @@ GameObject:
   - component: {fileID: 1014126329}
   - component: {fileID: 1014126328}
   - component: {fileID: 1014126331}
+  - component: {fileID: 1014126332}
   m_Layer: 0
   m_Name: GameObjectPoolManager
   m_TagString: Untagged
@@ -950,6 +951,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   update_interval: 60
+--- !u!114 &1014126332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014126327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2078317f9734e4fb2bd1e69dfe5633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  update_interval: 0.1
+  offset: {x: 0, y: 1, z: 0}
 --- !u!1 &1168555495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,8 +1260,8 @@ GameObject:
   - component: {fileID: 1301889232}
   - component: {fileID: 1301889231}
   m_Layer: 0
-  m_Name: hp_bar_player_0
-  m_TagString: Untagged
+  m_Name: player_health_bar_fill
+  m_TagString: health_bar_fill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1259,11 +1275,11 @@ Transform:
   m_GameObject: {fileID: 1301889229}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -1}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: -0.45000002, y: 0.6, z: -1}
+  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1273394913}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1301889231
 MonoBehaviour:
@@ -1570,8 +1586,8 @@ GameObject:
   - component: {fileID: 1424714979}
   - component: {fileID: 1424714980}
   m_Layer: 0
-  m_Name: player_hp_bar_background_0
-  m_TagString: Untagged
+  m_Name: player_health_bar_background
+  m_TagString: health_bar_background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1585,11 +1601,11 @@ Transform:
   m_GameObject: {fileID: 1424714978}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: -0.45000002, y: 0.6, z: 0}
+  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1273394913}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1424714980
 SpriteRenderer:
@@ -2080,3 +2096,5 @@ SceneRoots:
   - {fileID: 1768885770}
   - {fileID: 830439397}
   - {fileID: 1421384555}
+  - {fileID: 1301889230}
+  - {fileID: 1424714979}
