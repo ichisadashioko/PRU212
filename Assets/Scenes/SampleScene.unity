@@ -5833,7 +5833,7 @@ MonoBehaviour:
   active_duration: 60
   start_time: 0
   active: 0
-  active_chance: 1
+  active_chance: 10
   deal_damage_interval: 1
   player: {fileID: 0}
   last_deal_damage_time: 0

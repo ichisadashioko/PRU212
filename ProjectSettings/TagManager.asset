@@ -11,6 +11,7 @@ TagManager:
   - health_bar_background
   - safe_portal
   - rain_partical_system
+  - restore_hp_item
   layers:
   - Default
   - TransparentFX

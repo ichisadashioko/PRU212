@@ -79,16 +79,16 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                     ObjectPoolManager.ReturnGameObjectToPool(bullet_list[i]);
                     var gun_prop = GUN_PROP.GetGunPropByLevel(GameState.CURRENT_LEVEL);
                     var hp_obj = gameObject.GetComponent<HPForEnermy>();
-                    if(hp_obj != null)
-					{
+                    if (hp_obj != null)
+                    {
                         hp_obj.HP = hp_obj.HP - gun_prop.Damage;
 
                         GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
-                        if(damage_popup_prefab != null)
+                        if (damage_popup_prefab != null)
                         {
                             var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
                             var _tmp = _damage_popup.GetComponent<TextMeshPro>();
-                            if(_tmp != null)
+                            if (_tmp != null)
                             {
                                 _tmp.text = $"{gun_prop.Damage}";
                                 //_tmp.color = new UnityEngine.Color(1f, 1f, 0f);
@@ -96,17 +96,17 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                                 _tmp.faceColor = new Color32(255, 255, 0, 255);
                             }
                             var _fade = _damage_popup.GetComponent<DamagePopupFade>();
-                            if(_fade != null)
+                            if (_fade != null)
                             {
                                 _fade.created_time = Time.time;
                             }
                         }
 
                         if (hp_obj.HP <= 0)
-						{
-							Die();
+                        {
+                            Die();
                             return;
-						}
+                        }
                     }
                 }
             }
@@ -117,24 +117,34 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
         //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
         SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
         ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-        DropExp();
+        HandleDrop();
 
     }
 
     private GameObject expPrefab;
+    public GameObject restore_hp_prefab;
 
-    private void DropExp()
+    private void HandleDrop()
     {
-        if (expPrefab == null)
-        {
-            expPrefab = Resources.Load<GameObject>("duc_exp_prefab");
-        }
+        Vector3 dropPosition = transform.position + new Vector3(0, 0.5f, 0);
 
-        if (expPrefab != null)
+        if (Random.Range(0, 100) < GameState.HP_DROP_RATE)
         {
-            Vector3 dropPosition = transform.position + new Vector3(0, 0.5f, 0);
-            // Instantiate(expPrefab, dropPosition, Quaternion.identity);
-            ObjectPoolManager.SpawnNewGameObject(expPrefab, dropPosition, Quaternion.identity);
+            if (restore_hp_prefab == null) { restore_hp_prefab = Resources.Load<GameObject>("Life_Fruit_prefab"); }
+            if (restore_hp_prefab == null) { return; }
+            ObjectPoolManager.SpawnNewGameObject(restore_hp_prefab, dropPosition, Quaternion.identity, ObjectPoolManager.PoolType.RestoreHP);
+        }
+        else
+        {
+            if (expPrefab == null)
+            {
+                expPrefab = Resources.Load<GameObject>("duc_exp_prefab");
+            }
+
+            if (expPrefab != null)
+            {
+                ObjectPoolManager.SpawnNewGameObject(expPrefab, dropPosition, Quaternion.identity, ObjectPoolManager.PoolType.Exp);
+            }
         }
     }
 }

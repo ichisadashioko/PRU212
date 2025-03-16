@@ -30,10 +30,10 @@ public class PlayerHealthBar : MonoBehaviour
             var sr = GetComponent<SpriteRenderer>();
             if (sr != null)
             {
-
                 var tmp = sr.transform.localScale;
                 current_hp = GameState.CURRENT_HP;
-                tmp.x = Mathf.Max(0f, ((float)GameState.CURRENT_HP / (float)GameState.MAX_HP)) * default_scale_x;
+                tmp.x = Mathf.Clamp(((float)GameState.CURRENT_HP / (float)GameState.MAX_HP), 0f, 1f) * default_scale_x;
+                //tmp.x = Mathf.Max(0f, ((float)GameState.CURRENT_HP / (float)GameState.MAX_HP)) * default_scale_x;
                 //tmp.x = 0.5f * default_scale_x;
                 sr.transform.localScale = tmp;
                 //sr.material.mainTextureOffset = new Vector2(0.5f, 1);

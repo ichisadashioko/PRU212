@@ -11,6 +11,8 @@ public class ObjectPoolManager : MonoBehaviour
     {
         Bullet,
         Text,
+        Exp,
+        RestoreHP,
         None
     }
 
@@ -34,7 +36,7 @@ public class ObjectPoolManager : MonoBehaviour
         return ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type];
     }
 
-    public static GameObject SpawnNewGameObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
+    public static GameObject SpawnNewGameObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None, bool active = true)
     {
         GameObjectPoolInfo pool = null;
         foreach (GameObjectPoolInfo p in ALL_OBJECT_POOL_LIST)
@@ -76,7 +78,10 @@ public class ObjectPoolManager : MonoBehaviour
             spawnableObj.transform.position = spawnPosition;
             spawnableObj.transform.rotation = spawnRotation;
             pool.AvailableObjectList.Remove(spawnableObj);
-            spawnableObj.SetActive(true);
+            if (active)
+            {
+                spawnableObj.SetActive(true);
+            }
         }
 
         return spawnableObj;
