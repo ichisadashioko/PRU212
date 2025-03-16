@@ -3,8 +3,10 @@ public class RotateAroundPlayerSkill : MonoBehaviour
 {
     public GameObject player;
 
-    public float orbitRadius = 2f; // Bán kính quỹ đạo
-    public float orbitSpeed = 50f; // Tốc độ quay quanh Player
+    public float orbitRadius = 2f;
+    public float orbitSpeed = 50f;
+    public float created_time = 0;
+    public bool modify_game_state = false;
 
     public float angle = 0f;
     void Update()
@@ -13,13 +15,9 @@ public class RotateAroundPlayerSkill : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+
         if (player != null)
         {
-            if(GameState.CURRENT_LEVEL == 1)
-            {
-
-            }
-
             angle += orbitSpeed * Time.deltaTime;
 
             float radians = angle * Mathf.Deg2Rad;
@@ -31,6 +29,15 @@ public class RotateAroundPlayerSkill : MonoBehaviour
 
             transform.Rotate(0, 0, orbitSpeed * Time.deltaTime);
         }
-    }
 
+        float exist_time = 360f / orbitSpeed;
+        if ((Time.time - created_time) > exist_time)
+        {
+            ObjectPoolManager.ReturnGameObjectToPool(gameObject);
+            if (modify_game_state)
+            {
+                GameState.IS_SWORD_ACTIVE = false;
+            }
+        }
+    }
 }

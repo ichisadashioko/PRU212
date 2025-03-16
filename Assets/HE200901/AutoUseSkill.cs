@@ -1,23 +1,11 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MobStat
 {
     public float Damage { get; set; }
     public float MoveSpeed { get; set; }
-}
-
-public class SWORD_PROP
-{
-    public float CD { get; set; }
-    public float Count { get; set; }
-    public float Damage { get; set; }
-    public float RotationSpeed { get; set; }
-
-    public static SWORD_PROP GetSwordPropByLevel(int level)
-    {
-        //return new SWORD_PROP() { CD=Mathf.Max(0.1f, )}
-        return null;
-    }
 }
 
 public class GUN_PROP
@@ -77,30 +65,72 @@ public class AutoUseSkill : MonoBehaviour
 {
     float last_gun_fired_time_delta = 0;
 
-    public static readonly float SWORD_LEVEL1_CD = 1f;
-    public static readonly float SWORD_LEVEL2_CD = 0.9f;
-    public static readonly float SWORD_LEVEL3_CD = 0.8f;
-    public static readonly float SWORD_LEVEL4_CD = 0.7f;
-    public static readonly float SWORD_LEVEL5_CD = 0.6f;
-    public static readonly float SWORD_LEVEL6_CD = 0.5f;
-    public static readonly float SWORD_LEVEL7_CD = 0.4f;
-    public static readonly float SWORD_LEVEL8_CD = 0.3f;
-    public static readonly float SWORD_LEVEL9_CD = 0.2f;
-    public static readonly float SWORD_LEVEL10_CD = 0.1f;
-    public static readonly float SWORD_LEVEL11_CD = 0.09f;
-
-    public static float CURRENT_SWORD_CD = SWORD_LEVEL1_CD;
-    public static readonly float SWORD_LEVEL_MAX_CD = SWORD_LEVEL11_CD;
-
     public float CURRENT_GUN_CD = 1;
+    public float CURRENT_SWORD_CD = 1;
 
 
     public string bullet_prefab_name = "Star_Wrath_Bullet";
     public GameObject bullet_prefab;
+    public GameObject disc_prefab;
     void Update()
     {
         GUN_PROP gun_prop = GUN_PROP.GetGunPropByLevel(GameState.CURRENT_LEVEL);
         CURRENT_GUN_CD = gun_prop.CD;
+
+        SWORD_PROP sword_prop = SWORD_PROP.GetSwordPropByLevel(GameState.CURRENT_LEVEL);
+        CURRENT_SWORD_CD = sword_prop.CD;
+
+        float current_time = Time.time;
+        if (!GameState.IS_SWORD_ACTIVE)
+        {
+            if((current_time - GameState.LAST_SWORD_USE_TIME) > CURRENT_SWORD_CD)
+            {
+                GameState.IS_SWORD_ACTIVE = true;
+                GameState.LAST_SWORD_USE_TIME = current_time;
+                int sword_count = sword_prop.Count;
+                sword_count = Math.Max(0, sword_count);
+
+                if(disc_prefab == null)
+                {
+                    disc_prefab = Resources.Load<GameObject>("Light_Disc_prefab");
+                }
+
+                if(disc_prefab != null)
+                {
+                    float[] starting_angle_arr = UnityGameUtility.calculate_starting_angle_of_rotating_projectiles(sword_count);
+                    float rotate_speed = sword_prop.RotationSpeed;
+
+                    for (int i = 0; i < sword_count; i++)
+                    {
+                        float starting_angle = starting_angle_arr[i];
+                        GameObject disk_obj = ObjectPoolManager.SpawnNewGameObject(
+                            disc_prefab,
+                            new Vector3(0, 0, 0),
+                            Quaternion.identity,
+                            active: false
+                        );
+
+                        var _tmp = disk_obj.GetComponent<RotateAroundPlayerSkill>();
+                        if(_tmp != null)
+                        {
+                            _tmp.orbitSpeed = rotate_speed;
+                            _tmp.angle = starting_angle;
+                            _tmp.created_time = current_time;
+                            if (i == 0)
+                            {
+                                _tmp.modify_game_state = true;
+                            }
+                            else
+                            {
+                                _tmp.modify_game_state = false;
+                            }
+                        }
+
+                        disk_obj.SetActive(true);
+                    }
+                }
+            }
+        }
 
         last_gun_fired_time_delta += Time.deltaTime;
         if (last_gun_fired_time_delta > CURRENT_GUN_CD)
