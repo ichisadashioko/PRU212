@@ -20,6 +20,7 @@ public class SpawnEnemies : MonoBehaviour
 
     public Vector3 random_position_out_of_screen()
     {
+        // TODO
         float random_position_x = Random.Range(-(Screen.width / 4), Screen.width + (Screen.width / 4));
         float random_position_y = Random.Range(0 - (Screen.height / 4), Screen.height + (Screen.height / 4));
 

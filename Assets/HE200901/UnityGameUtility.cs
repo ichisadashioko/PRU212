@@ -2,6 +2,15 @@ using System.Drawing;
 using UnityEngine;
 
 public class UnityGameUtility {
+    public static Vector3 random_position_on_screen()
+    {
+        float random_position_x = Random.Range(0, Screen.width);
+        float random_position_y = Random.Range(0 , Screen.height);
+
+        Vector3 random_position_in_game_world = Camera.main.ScreenToWorldPoint(new Vector3(random_position_x, random_position_y, 0));
+        return random_position_in_game_world;
+    }
+
     public static bool check_collision(GameObject go1, GameObject go2)
     {
         if (go1 == null) { return false; }
