@@ -5761,7 +5761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b7cfdead9c6a4a8e946afafe4e2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemey_prefab_name: mob
+  enemy_prefab_name: mob
+  enemy_prefab_name_2: Dark_Mage_mob_prefab
+  enemy_prefab_2: {fileID: 0}
   spawn_interval_secs: 0.5
 --- !u!114 &1014126329
 MonoBehaviour:

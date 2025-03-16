@@ -7,6 +7,7 @@ public class RotateAroundPlayerSkill : MonoBehaviour
     public float orbitSpeed = 50f;
     public float created_time = 0;
     public bool modify_game_state = false;
+    public float TODO_duration = 0f;
 
     public float angle = 0f;
     void Update()
@@ -15,6 +16,8 @@ public class RotateAroundPlayerSkill : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
+
+        orbitSpeed = SWORD_PROP.GetSwordPropByLevel(GameState.CURRENT_LEVEL).RotationSpeed;
 
         if (player != null)
         {

@@ -57,6 +57,12 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
         {
             last_update_delta_time = 0;
 
+            var hp_obj = gameObject.GetComponent<HPForEnermy>();
+            if (hp_obj == null) { return; }
+
+            float current_sword_damage = SWORD_PROP.GetSwordPropByLevel(GameState.CURRENT_LEVEL).Damage;
+
+            float taken_damage_from_sword = 0;
             var sword_list = GameObject.FindGameObjectsWithTag("sword");
             for (int i = 0; i < sword_list.Length; i++)
             {
@@ -64,6 +70,38 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                 {
                     //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
                     //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+                    taken_damage_from_sword += current_sword_damage;
+                    // TODO add i-frame to sword damage
+                    //Die();
+                    //return;
+                }
+            }
+
+            if (taken_damage_from_sword > 0)
+            {
+                hp_obj.HP -= taken_damage_from_sword;
+
+                GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
+                if (damage_popup_prefab != null)
+                {
+                    var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    var _tmp = _damage_popup.GetComponent<TextMeshPro>();
+                    if (_tmp != null)
+                    {
+                        _tmp.text = $"{taken_damage_from_sword}";
+                        //_tmp.color = new UnityEngine.Color(1f, 1f, 0f);
+                        _tmp.color = new Color32(255, 255, 0, 255);
+                        _tmp.faceColor = new Color32(255, 255, 0, 255);
+                    }
+                    var _fade = _damage_popup.GetComponent<DamagePopupFade>();
+                    if (_fade != null)
+                    {
+                        _fade.created_time = Time.time;
+                    }
+                }
+
+                if (hp_obj.HP <= 0)
+                {
                     Die();
                     return;
                 }
@@ -78,35 +116,31 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                     //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     ObjectPoolManager.ReturnGameObjectToPool(bullet_list[i]);
                     var gun_prop = GUN_PROP.GetGunPropByLevel(GameState.CURRENT_LEVEL);
-                    var hp_obj = gameObject.GetComponent<HPForEnermy>();
-                    if (hp_obj != null)
+                    hp_obj.HP = hp_obj.HP - gun_prop.Damage;
+
+                    GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
+                    if (damage_popup_prefab != null)
                     {
-                        hp_obj.HP = hp_obj.HP - gun_prop.Damage;
-
-                        GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
-                        if (damage_popup_prefab != null)
+                        var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                        var _tmp = _damage_popup.GetComponent<TextMeshPro>();
+                        if (_tmp != null)
                         {
-                            var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
-                            var _tmp = _damage_popup.GetComponent<TextMeshPro>();
-                            if (_tmp != null)
-                            {
-                                _tmp.text = $"{gun_prop.Damage}";
-                                //_tmp.color = new UnityEngine.Color(1f, 1f, 0f);
-                                _tmp.color = new Color32(255, 255, 0, 255);
-                                _tmp.faceColor = new Color32(255, 255, 0, 255);
-                            }
-                            var _fade = _damage_popup.GetComponent<DamagePopupFade>();
-                            if (_fade != null)
-                            {
-                                _fade.created_time = Time.time;
-                            }
+                            _tmp.text = $"{gun_prop.Damage}";
+                            //_tmp.color = new UnityEngine.Color(1f, 1f, 0f);
+                            _tmp.color = new Color32(255, 255, 0, 255);
+                            _tmp.faceColor = new Color32(255, 255, 0, 255);
                         }
-
-                        if (hp_obj.HP <= 0)
+                        var _fade = _damage_popup.GetComponent<DamagePopupFade>();
+                        if (_fade != null)
                         {
-                            Die();
-                            return;
+                            _fade.created_time = Time.time;
                         }
+                    }
+
+                    if (hp_obj.HP <= 0)
+                    {
+                        Die();
+                        return;
                     }
                 }
             }
