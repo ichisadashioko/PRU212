@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8982043363148217094}
   m_Layer: 0
   m_Name: Celestial_Magnet_prefab
-  m_TagString: Untagged
+  m_TagString: magnet_item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

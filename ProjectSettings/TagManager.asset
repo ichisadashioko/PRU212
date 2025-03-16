@@ -12,6 +12,7 @@ TagManager:
   - safe_portal
   - rain_partical_system
   - restore_hp_item
+  - magnet_item
   layers:
   - Default
   - TransparentFX
