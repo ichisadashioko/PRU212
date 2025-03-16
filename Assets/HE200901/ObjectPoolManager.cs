@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,36 +10,28 @@ public class ObjectPoolManager : MonoBehaviour
     public enum PoolType
     {
         Bullet,
+        Text,
         None
     }
 
     public static PoolType PoolingType;
 
-    private static GameObject _bullet_game_object_holder;
-    private static GameObject _other_game_object_holder;
-
-    private static void setup_empty_game_objects_to_hold_pooled_objects()
-    {
-        _bullet_game_object_holder = new GameObject("bullet_game_object_pool");
-        _other_game_object_holder = new GameObject("other_game_object_pool");
-    }
+    private static Dictionary<object, GameObject> ENUM_TO_PARENT_GAME_OBJECT_DICT = new();
 
     private static GameObject set_parent_object(PoolType pool_type)
     {
-        if(_bullet_game_object_holder == null)
+        //var values = Enum.GetValues(typeof(PoolType));
+        //foreach(var enum_value in values)
+        //{
+        //    ENUM_TO_PARENT_GAME_OBJECT_DICT.Add(enum_value, new GameObject($"{enum_value}_PARENT_GAME_OBJECT"));
+        //}
+
+        if (!ENUM_TO_PARENT_GAME_OBJECT_DICT.ContainsKey(pool_type))
         {
-            setup_empty_game_objects_to_hold_pooled_objects();
+            ENUM_TO_PARENT_GAME_OBJECT_DICT.Add(pool_type, new GameObject($"{pool_type}_PARENT_GAME_OBJECT"));
         }
 
-        switch (pool_type)
-        {
-            case PoolType.Bullet:
-                return _bullet_game_object_holder;
-            case PoolType.None:
-                return _other_game_object_holder;
-            default:
-                return null;
-        }
+        return ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type];
     }
 
     public static GameObject SpawnNewGameObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
@@ -60,9 +53,9 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         GameObject spawnableObj = null;
-        foreach(GameObject obj in pool.AvailableObjectList)
+        foreach (GameObject obj in pool.AvailableObjectList)
         {
-            if(obj != null)
+            if (obj != null)
             {
                 spawnableObj = obj;
                 break;

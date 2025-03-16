@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Drawing;
+using TMPro;
+using TMPro.EditorUtilities;
 
 public class TmpDeathOnTouchingBullet : MonoBehaviour
 {
@@ -80,12 +82,29 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                     if(hp_obj != null)
 					{
                         hp_obj.HP = hp_obj.HP - gun_prop.Damage;
+
+                        GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
+                        if(damage_popup_prefab != null)
+                        {
+                            var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                            var _tmp = _damage_popup.GetComponent<TextMeshPro>();
+                            if(_tmp != null)
+                            {
+                                _tmp.text = $"{gun_prop.Damage}";
+                            }
+                            var _fade = _damage_popup.GetComponent<DamagePopupFade>();
+                            if(_fade != null)
+                            {
+                                _fade.created_time = Time.time;
+                            }
+                        }
+
                         if (hp_obj.HP <= 0)
 						{
 							Die();
+                            return;
 						}
                     }
-                    return;
                 }
             }
         }
