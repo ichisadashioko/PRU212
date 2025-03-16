@@ -6,7 +6,15 @@ public class RandomHostileRain : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        GameObject rain_partical_system = GameObject.FindGameObjectWithTag("rain_partical_system");
+        if (rain_partical_system != null)
+        {
+            var ps = rain_partical_system.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                ps.Stop();
+            }
+        }
     }
 
     public float active_duration = 60f;
@@ -46,6 +54,16 @@ public class RandomHostileRain : MonoBehaviour
                     ObjectPoolManager.ReturnGameObjectToPool(safe_portal_obj);
                 }
 
+                GameObject rain_partical_system = GameObject.FindGameObjectWithTag("rain_partical_system");
+                if (rain_partical_system != null)
+                {
+                    var ps = rain_partical_system.GetComponent<ParticleSystem>();
+                    if (ps != null)
+                    {
+                        ps.Stop();
+                    }
+                }
+
                 return;
             }
 
@@ -78,8 +96,17 @@ public class RandomHostileRain : MonoBehaviour
                     safe_portal_prefab = Resources.Load<GameObject>("safe_portal");
                 }
 
-                // TODO
+                // TODO spawn near player
                 GameObject safe_portal_obj = ObjectPoolManager.SpawnNewGameObject(safe_portal_prefab, new Vector3(0, 0, 0), Quaternion.identity);
+                GameObject rain_partical_system = GameObject.FindGameObjectWithTag("rain_partical_system");
+                if(rain_partical_system != null)
+                {
+                    var ps = rain_partical_system.GetComponent<ParticleSystem>();
+                    if(ps != null)
+                    {
+                        ps.Play();
+                    }
+                }
             }
         }
     }
