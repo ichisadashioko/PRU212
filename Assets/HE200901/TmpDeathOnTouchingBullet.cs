@@ -91,6 +91,9 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                             if(_tmp != null)
                             {
                                 _tmp.text = $"{gun_prop.Damage}";
+                                //_tmp.color = new UnityEngine.Color(1f, 1f, 0f);
+                                _tmp.color = new Color32(255, 255, 0, 255);
+                                _tmp.faceColor = new Color32(255, 255, 0, 255);
                             }
                             var _fade = _damage_popup.GetComponent<DamagePopupFade>();
                             if(_fade != null)

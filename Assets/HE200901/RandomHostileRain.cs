@@ -1,4 +1,5 @@
 using System.Drawing;
+using TMPro;
 using UnityEngine;
 
 public class RandomHostileRain : MonoBehaviour
@@ -77,6 +78,24 @@ public class RandomHostileRain : MonoBehaviour
             {
                 GameState.CURRENT_HP -= rain_damage;
                 last_deal_damage_time = current_time;
+
+                GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
+                if (damage_popup_prefab != null)
+                {
+                    var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, player.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    var _tmp = _damage_popup.GetComponent<TextMeshPro>();
+                    if (_tmp != null)
+                    {
+                        _tmp.text = $"-{rain_damage}";
+                        _tmp.color = new UnityEngine.Color(1f, 0, 0);
+                        _tmp.faceColor = new UnityEngine.Color(1f, 0, 0);
+                    }
+                    var _fade = _damage_popup.GetComponent<DamagePopupFade>();
+                    if (_fade != null)
+                    {
+                        _fade.created_time = Time.time;
+                    }
+                }
             }
         }
         else
@@ -99,10 +118,10 @@ public class RandomHostileRain : MonoBehaviour
                 // TODO spawn near player
                 GameObject safe_portal_obj = ObjectPoolManager.SpawnNewGameObject(safe_portal_prefab, new Vector3(0, 0, 0), Quaternion.identity);
                 GameObject rain_partical_system = GameObject.FindGameObjectWithTag("rain_partical_system");
-                if(rain_partical_system != null)
+                if (rain_partical_system != null)
                 {
                     var ps = rain_partical_system.GetComponent<ParticleSystem>();
-                    if(ps != null)
+                    if (ps != null)
                     {
                         ps.Play();
                     }
