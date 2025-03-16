@@ -9,4 +9,6 @@ public static class GameState
 
 	public static bool IS_SWORD_ACTIVE = false;
 	public static float LAST_SWORD_USE_TIME = 0;
+
+	public static float MAGNET_DROP_RATE = 5f;
 }

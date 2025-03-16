@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
@@ -6,8 +7,8 @@ public class UnityGameUtility
 {
     public static Vector3 random_position_on_screen()
     {
-        float random_position_x = Random.Range(0, Screen.width);
-        float random_position_y = Random.Range(0, Screen.height);
+        float random_position_x = UnityEngine.Random.Range(0, Screen.width);
+        float random_position_y = UnityEngine.Random.Range(0, Screen.height);
 
         Vector3 random_position_in_game_world = Camera.main.ScreenToWorldPoint(new Vector3(random_position_x, random_position_y, 0));
         return random_position_in_game_world;
@@ -80,7 +81,9 @@ public class SWORD_PROP
     public static List<SWORD_PROP> PREDEFINED_BY_LEVEL = null;
     public static void INIT_PREDEFINED_BY_LEVEL()
     {
+        SWORD_PROP tmp_obj = null;
         PREDEFINED_BY_LEVEL = new();
+        // 1
         PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
         {
             CD = 1f,
@@ -88,202 +91,117 @@ public class SWORD_PROP
             Damage = 2,
             RotationSpeed = 30
         });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+        // 2
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 1f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 40
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count,
+            Damage = tmp_obj.Damage,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 3
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 1f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 50
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count,
+            Damage = tmp_obj.Damage,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 4
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 1f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 60
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count,
+            Damage = tmp_obj.Damage,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 5
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 1f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 70
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count + 1,
+            Damage = tmp_obj.Damage,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 6
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 1f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count,
+            Damage = tmp_obj.Damage + 1,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 7
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 0.9f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count,
+            Damage = tmp_obj.Damage + 1,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 8
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 0.8f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count + 1,
+            Damage = tmp_obj.Damage + 1,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 9
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 0.7f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count,
+            Damage = tmp_obj.Damage + 1,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        // 10
+        tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+        tmp_obj = new SWORD_PROP()
         {
-            CD = 0.6f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
+            CD = tmp_obj.CD - 0.1f,
+            Count = tmp_obj.Count + 1,
+            Damage = tmp_obj.Damage + 1,
+            RotationSpeed = tmp_obj.RotationSpeed + 10f
+        };
+        PREDEFINED_BY_LEVEL.Add(tmp_obj);
+
+        for (int i = 0; i < 40; i++)
         {
-            CD = 0.5f,
-            Count = 1,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 2,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 3,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 80
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 90
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 100
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 180
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 190
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 200
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 210
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 220
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 230
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 240
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 250
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 260
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 270
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 280
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 290
-        });
-        PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
-        {
-            CD = 0.5f,
-            Count = 4,
-            Damage = 2,
-            RotationSpeed = 300
-        });
+            tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+            tmp_obj = new SWORD_PROP()
+            {
+                CD = tmp_obj.CD - 0.1f,
+                Count = tmp_obj.Count + 1,
+                Damage = tmp_obj.Damage + 1,
+                RotationSpeed = tmp_obj.RotationSpeed + 10f
+            };
+            PREDEFINED_BY_LEVEL.Add(tmp_obj);
+        }
     }
     public static SWORD_PROP GetSwordPropByLevel(int level)
     {
@@ -292,11 +210,18 @@ public class SWORD_PROP
             INIT_PREDEFINED_BY_LEVEL();
         }
 
-        if (level < PREDEFINED_BY_LEVEL.Count)
+        if (PREDEFINED_BY_LEVEL.Count == 0)
         {
-            return PREDEFINED_BY_LEVEL[level];
+            return new SWORD_PROP()
+            {
+                CD = 0.5f,
+                Count = 4,
+                Damage = 2,
+                RotationSpeed = 300
+            };
         }
-        //return new SWORD_PROP() { CD=Mathf.Max(0.1f, )}
-        return null;
+
+        level = Math.Clamp(level, 0, PREDEFINED_BY_LEVEL.Count - 1);
+        return PREDEFINED_BY_LEVEL[level];
     }
 }

@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf51b9b4ee471241b7e60524dde1a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
 --- !u!61 &-3786435149749426583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -209,6 +209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   update_interval: 0.1
+  restore_hp_prefab: {fileID: 0}
+  magnet_prefab: {fileID: 0}
 --- !u!114 &-5077412938724197129
 MonoBehaviour:
   m_ObjectHideFlags: 0

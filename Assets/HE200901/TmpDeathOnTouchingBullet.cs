@@ -123,12 +123,21 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
 
     private GameObject expPrefab;
     public GameObject restore_hp_prefab;
+    public GameObject magnet_prefab;
 
     private void HandleDrop()
     {
         Vector3 dropPosition = transform.position + new Vector3(0, 0.5f, 0);
 
-        if (Random.Range(0, 100) < GameState.HP_DROP_RATE)
+        float random_number = Random.Range(0, 100);
+        if (random_number < GameState.MAGNET_DROP_RATE)
+        {
+            if (magnet_prefab == null) { restore_hp_prefab = Resources.Load<GameObject>("Celestial_Magnet_prefab"); }
+            if (magnet_prefab == null) { return; }
+            ObjectPoolManager.SpawnNewGameObject(magnet_prefab, dropPosition, Quaternion.identity, ObjectPoolManager.PoolType.RestoreHP);
+
+        }
+        else if (random_number < GameState.HP_DROP_RATE)
         {
             if (restore_hp_prefab == null) { restore_hp_prefab = Resources.Load<GameObject>("Life_Fruit_prefab"); }
             if (restore_hp_prefab == null) { return; }
@@ -136,15 +145,9 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
         }
         else
         {
-            if (expPrefab == null)
-            {
-                expPrefab = Resources.Load<GameObject>("duc_exp_prefab");
-            }
-
-            if (expPrefab != null)
-            {
-                ObjectPoolManager.SpawnNewGameObject(expPrefab, dropPosition, Quaternion.identity, ObjectPoolManager.PoolType.Exp);
-            }
+            if (expPrefab == null) { expPrefab = Resources.Load<GameObject>("duc_exp_prefab"); }
+            if (expPrefab == null) { return; }
+            ObjectPoolManager.SpawnNewGameObject(expPrefab, dropPosition, Quaternion.identity, ObjectPoolManager.PoolType.Exp);
         }
     }
 }
