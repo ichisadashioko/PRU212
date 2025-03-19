@@ -21,9 +21,35 @@ public class SpawnEnemies : MonoBehaviour
 
     public Vector3 random_position_out_of_screen()
     {
-        // TODO
-        float random_position_x = Random.Range(-(Screen.width / 4), Screen.width + (Screen.width / 4));
-        float random_position_y = Random.Range(0 - (Screen.height / 4), Screen.height + (Screen.height / 4));
+        float random_number = Random.Range(0, 4);
+        float random_position_x = 0;
+        float random_position_y = 0;
+        if (random_number < 1)
+        {
+            // top left
+            // top -1/4 => 0
+            // left -1/4 => 0
+
+            random_position_x = Random.Range(-(Screen.width / 4), 0);
+            random_position_y = Random.Range(0 - (Screen.height / 4), 0);
+        }
+        else if (random_number < 2)
+        {
+            // top right
+            random_position_x = Random.Range(Screen.width, Screen.width + Screen.width / 4);
+            random_position_y = Random.Range(0 - (Screen.height / 4), 0);
+        }
+        else if (random_number < 3)
+        {
+            // bottom left
+            random_position_x = Random.Range(-(Screen.width / 4), 0);
+            random_position_y = Random.Range(Screen.height + (Screen.height / 4), 0);
+        }
+        else
+        {
+            random_position_x = Random.Range(Screen.width, Screen.width + Screen.width / 4);
+            random_position_y = Random.Range(Screen.height + (Screen.height / 4), 0);
+        }
 
         Vector3 random_position_in_game_world = Camera.main.ScreenToWorldPoint(new Vector3(random_position_x, random_position_y, 0));
         return random_position_in_game_world;
