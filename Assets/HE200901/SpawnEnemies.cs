@@ -16,7 +16,6 @@ public class SpawnEnemies : MonoBehaviour
 
     private GameObject obj_to_spawn_prefab;
     public static int max_spawn_count = 10000;
-    public static int CURRENT_ACTIVE_ENEMIES_COUNT = 0;
     public float spawn_interval_secs = 0.5f;
     private float last_spawn_delta_time_secs = 0;
 
@@ -42,11 +41,11 @@ public class SpawnEnemies : MonoBehaviour
             if ((obj_to_spawn_prefab == null) || (enemy_prefab_2 == null)) { return; }
 
             int number_of_mobs_to_create = 1 + (int)(Mathf.Max(0, GameState.CURRENT_DIFFICULTY) * 5);
-            number_of_mobs_to_create = Mathf.Max(0, number_of_mobs_to_create - CURRENT_ACTIVE_ENEMIES_COUNT);
+            number_of_mobs_to_create = Mathf.Max(0, number_of_mobs_to_create - GameState.CURRENT_ACTIVE_ENEMIES_COUNT);
             for (int i = 0; i < number_of_mobs_to_create; i++)
             {
 
-                CURRENT_ACTIVE_ENEMIES_COUNT += 1;
+                GameState.CURRENT_ACTIVE_ENEMIES_COUNT += 1;
                 Vector3 spawn_location = random_position_out_of_screen();
                 spawn_location.z = 0;
                 GameObject clone_obj;

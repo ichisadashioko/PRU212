@@ -65,7 +65,7 @@ public class RemovedOnTouchPlayer : MonoBehaviour
             last_update_delta_time = 0;
             if(collide_with_player()){
                 // ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                // SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+                // GameState.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                 float current_time = Time.time;
                 float melee_damage_deal_delta_time = current_time - melee_damage_deal_time;
                 if(melee_damage_deal_delta_time > melee_damage_deal_interval)

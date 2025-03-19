@@ -16,6 +16,7 @@ public class RunGame : MonoBehaviour
 
     private void play_button_clicked(ClickEvent evt)
     {
+        GameState.reset_game_state();
         SceneManager.LoadScene("SampleScene");
     }
 

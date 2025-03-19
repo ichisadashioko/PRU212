@@ -10,7 +10,6 @@ public class ExperienceManager : MonoBehaviour
     [Header("Experience")]
     [SerializeField] AnimationCurve experienceCurve;
 
-    int totalExperience;
     int previousLevelsExperience, nextLevelsExperience;
 
 
@@ -38,14 +37,14 @@ public class ExperienceManager : MonoBehaviour
 
     public void AddExperience(int amount)
     {
-        totalExperience += amount;
+        GameState.CURRENT_EXP += amount;
         CheckForLevelUp();
         UpdateInterface();
     }
 
     void CheckForLevelUp()
     {
-        if (totalExperience >= nextLevelsExperience)
+        if (GameState.CURRENT_EXP >= nextLevelsExperience)
         {
             GameState.CURRENT_LEVEL++;
             UpdateLevel();
@@ -62,7 +61,7 @@ public class ExperienceManager : MonoBehaviour
 
     void UpdateInterface()
     {
-        int start = totalExperience - previousLevelsExperience;
+        int start = GameState.CURRENT_EXP - previousLevelsExperience;
         int end = nextLevelsExperience - previousLevelsExperience;
 
         levelText.text = GameState.CURRENT_LEVEL.ToString();

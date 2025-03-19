@@ -83,50 +83,59 @@ public class AutoUseSkill : MonoBehaviour
         float current_time = Time.time;
         if (!GameState.IS_SWORD_ACTIVE)
         {
-            if((current_time - GameState.LAST_SWORD_USE_TIME) > CURRENT_SWORD_CD)
+            if ((current_time - GameState.LAST_SWORD_USE_TIME) > CURRENT_SWORD_CD)
             {
                 GameState.IS_SWORD_ACTIVE = true;
                 GameState.LAST_SWORD_USE_TIME = current_time;
                 int sword_count = sword_prop.Count;
                 sword_count = Math.Max(0, sword_count);
-
-                if(disc_prefab == null)
+                if (sword_count == 0)
                 {
-                    disc_prefab = Resources.Load<GameObject>("Light_Disc_prefab");
+                    GameState.IS_SWORD_ACTIVE = false;
+                    GameState.LAST_SWORD_USE_TIME = 0;
+
                 }
-
-                if(disc_prefab != null)
+                else
                 {
-                    float[] starting_angle_arr = UnityGameUtility.calculate_starting_angle_of_rotating_projectiles(sword_count);
-                    float rotate_speed = sword_prop.RotationSpeed;
 
-                    for (int i = 0; i < sword_count; i++)
+                    if (disc_prefab == null)
                     {
-                        float starting_angle = starting_angle_arr[i];
-                        GameObject disk_obj = ObjectPoolManager.SpawnNewGameObject(
-                            disc_prefab,
-                            new Vector3(0, 0, 0),
-                            Quaternion.identity,
-                            active: false
-                        );
+                        disc_prefab = Resources.Load<GameObject>("Light_Disc_prefab");
+                    }
 
-                        var _tmp = disk_obj.GetComponent<RotateAroundPlayerSkill>();
-                        if(_tmp != null)
+                    if (disc_prefab != null)
+                    {
+                        float[] starting_angle_arr = UnityGameUtility.calculate_starting_angle_of_rotating_projectiles(sword_count);
+                        float rotate_speed = sword_prop.RotationSpeed;
+
+                        for (int i = 0; i < sword_count; i++)
                         {
-                            _tmp.orbitSpeed = rotate_speed;
-                            _tmp.angle = starting_angle;
-                            _tmp.created_time = current_time;
-                            if (i == 0)
-                            {
-                                _tmp.modify_game_state = true;
-                            }
-                            else
-                            {
-                                _tmp.modify_game_state = false;
-                            }
-                        }
+                            float starting_angle = starting_angle_arr[i];
+                            GameObject disk_obj = ObjectPoolManager.SpawnNewGameObject(
+                                disc_prefab,
+                                new Vector3(0, 0, 0),
+                                Quaternion.identity,
+                                active: false
+                            );
 
-                        disk_obj.SetActive(true);
+                            var _tmp = disk_obj.GetComponent<RotateAroundPlayerSkill>();
+                            if (_tmp != null)
+                            {
+                                _tmp.orbitSpeed = rotate_speed;
+                                _tmp.angle = starting_angle;
+                                _tmp.created_time = current_time;
+                                if (i == 0)
+                                {
+                                    _tmp.modify_game_state = true;
+                                }
+                                else
+                                {
+                                    _tmp.modify_game_state = false;
+                                }
+                            }
+
+                            disk_obj.SetActive(true);
+                        }
                     }
                 }
             }

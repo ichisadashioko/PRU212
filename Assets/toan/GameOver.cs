@@ -18,6 +18,7 @@ public class GameOver : MonoBehaviour
 
     private void restart_button_clicked(ClickEvent evt)
     {
+        GameState.reset_game_state();
         SceneManager.LoadScene("SampleScene");
     }
     private void menu_button_clicked(ClickEvent evt)

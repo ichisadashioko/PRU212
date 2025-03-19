@@ -69,7 +69,7 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                 if (CheckCollision(sword_list[i]))
                 {
                     //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+                    //GameState.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     taken_damage_from_sword += current_sword_damage;
                     // TODO add i-frame to sword damage
                     //Die();
@@ -113,7 +113,7 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                 if (CheckCollision(bullet_list[i]))
                 {
                     //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-                    //SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+                    //GameState.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
                     ObjectPoolManager.ReturnGameObjectToPool(bullet_list[i]);
                     var gun_prop = GUN_PROP.GetGunPropByLevel(GameState.CURRENT_LEVEL);
                     hp_obj.HP = hp_obj.HP - gun_prop.Damage;
@@ -149,7 +149,7 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
     private void Die()
     {
         //ObjectPoolManager.ReturnGameObjectToPool(gameObject);
-        SpawnEnemies.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
+        GameState.CURRENT_ACTIVE_ENEMIES_COUNT -= 1;
         ObjectPoolManager.ReturnGameObjectToPool(gameObject);
         HandleDrop();
 

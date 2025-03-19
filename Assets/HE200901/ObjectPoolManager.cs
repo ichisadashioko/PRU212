@@ -33,7 +33,22 @@ public class ObjectPoolManager : MonoBehaviour
             ENUM_TO_PARENT_GAME_OBJECT_DICT.Add(pool_type, new GameObject($"{pool_type}_PARENT_GAME_OBJECT"));
         }
 
-        return ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type];
+        var go = ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type];
+        if(go == null)
+        {
+            go = new GameObject($"{pool_type}_PARENT_GAME_OBJECT");
+            ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type] = go;
+        }
+
+        if (go.activeInHierarchy)
+        {
+            return go;
+        }
+
+        go = new GameObject($"{pool_type}_PARENT_GAME_OBJECT");
+        ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type] = go;
+
+        return go;
     }
 
     public static GameObject SpawnNewGameObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None, bool active = true)

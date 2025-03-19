@@ -86,10 +86,10 @@ public class SWORD_PROP
         // 1
         PREDEFINED_BY_LEVEL.Add(new SWORD_PROP()
         {
-            CD = 1f,
-            Count = 1,
+            CD = 4f,
+            Count = 0,
             Damage = 2,
-            RotationSpeed = 30
+            RotationSpeed = 180
         });
         // 2
         tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
@@ -107,7 +107,7 @@ public class SWORD_PROP
         tmp_obj = new SWORD_PROP()
         {
             CD = tmp_obj.CD - 0.1f,
-            Count = tmp_obj.Count,
+            Count = tmp_obj.Count+1,
             Damage = tmp_obj.Damage,
             RotationSpeed = tmp_obj.RotationSpeed + 10f
         };
