@@ -9,9 +9,32 @@ public class MovePlayer : MonoBehaviour
 
     public float move_speed = 2f;
 
+
+
     // Update is called once per frame
     void Update()
     {
+        float left_x = 0;
+        float right_x = 0;
+        float top_y = 0;
+        float bottom_y = 0;
+
+        bool has_world_border = false;
+        GameObject world_bg = GameObject.FindGameObjectWithTag("world_bg");
+        if (world_bg != null)
+        {
+            var world_bg_sr = world_bg.GetComponent<SpriteRenderer>();
+            if (world_bg_sr != null)
+            {
+                left_x = world_bg.transform.position.x - world_bg_sr.bounds.size.x / 2f;
+                right_x = world_bg.transform.position.x + world_bg_sr.bounds.size.x / 2f;
+
+                top_y = world_bg.transform.position.y - world_bg_sr.bounds.size.y / 2f;
+                bottom_y = world_bg.transform.position.y + world_bg_sr.bounds.size.y / 2f;
+                has_world_border = true;
+            }
+        }
+
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey("a"))
         {
             Vector3 position = this.transform.position;
@@ -35,6 +58,14 @@ public class MovePlayer : MonoBehaviour
             Vector3 position = this.transform.position;
             position.y -= move_speed * Time.deltaTime;
             this.transform.position = position;
+        }
+
+        if (has_world_border)
+        {
+            Vector3 current_position = transform.position;
+            current_position.x = Mathf.Clamp(current_position.x, left_x, right_x);
+            current_position.y = Mathf.Clamp(current_position.y, top_y, bottom_y);
+            transform.position = current_position;
         }
     }
 }
