@@ -13,6 +13,7 @@ public class ObjectPoolManager : MonoBehaviour
         Text,
         Exp,
         RestoreHP,
+        Enemies,
         None
     }
 

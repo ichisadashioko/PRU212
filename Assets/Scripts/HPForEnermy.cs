@@ -14,7 +14,7 @@ public class HPForEnermy : MonoBehaviour
 
     }
 
-    public float HP { get; set; }
+    public float HP = 100;
     public void reset_hp()
     {
         HP = 2 * (1f + GameState.CURRENT_DIFFICULTY * 0.05f);

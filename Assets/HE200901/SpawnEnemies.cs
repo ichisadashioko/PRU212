@@ -77,11 +77,11 @@ public class SpawnEnemies : MonoBehaviour
                 GameObject clone_obj;
                 if (Random.Range(0f, 10f) < 1f)
                 {
-                    clone_obj = ObjectPoolManager.SpawnNewGameObject(enemy_prefab_2, spawn_location, Quaternion.identity);
+                    clone_obj = ObjectPoolManager.SpawnNewGameObject(enemy_prefab_2, spawn_location, Quaternion.identity, ObjectPoolManager.PoolType.Enemies);
                     var _tmp = clone_obj.GetComponent<EnemyFollow>();
                     if (_tmp != null)
                     {
-                        _tmp.speed = 5;
+                        _tmp.speed = 2;
                     }
 
                     var hp = clone_obj.GetComponent<HPForEnermy>();
@@ -94,11 +94,11 @@ public class SpawnEnemies : MonoBehaviour
                 }
                 else
                 {
-                    clone_obj = ObjectPoolManager.SpawnNewGameObject(obj_to_spawn_prefab, spawn_location, Quaternion.identity);
+                    clone_obj = ObjectPoolManager.SpawnNewGameObject(obj_to_spawn_prefab, spawn_location, Quaternion.identity, ObjectPoolManager.PoolType.Enemies);
                     var _tmp = clone_obj.GetComponent<EnemyFollow>();
                     if (_tmp != null)
                     {
-                        _tmp.speed = 2;
+                        _tmp.speed = 1;
                     }
 
                     var hp = clone_obj.GetComponent<HPForEnermy>();

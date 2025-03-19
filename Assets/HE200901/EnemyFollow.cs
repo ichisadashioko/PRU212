@@ -9,10 +9,8 @@ public class EnemyFollow : MonoBehaviour
     {
     }
 
-    void Update()
-    {
+    public void move_toward_player(){
         if(target == null){
-            // Find the player GameObject with the "Player" tag
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {
@@ -20,22 +18,17 @@ public class EnemyFollow : MonoBehaviour
             }
         }
 
-        if (target != null)
-        {
-            // Move towards the player's position
-            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        if(target == null){return;}
 
-            // Optional: Make the object face the player
-            //Vector3 direction = (target.position - transform.position).normalized;
-            //if (direction != Vector3.zero)
-            //{
-            //    transform.forward = direction;
-            //}
+        Vector2 new_pos_vector2 = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(target.position.x, target.position.y), speed * Time.deltaTime);
+        Vector3 current_pos = gameObject.transform.position;
+        current_pos.x = new_pos_vector2.x;
+        current_pos.y = new_pos_vector2.y;
+        transform.position = current_pos;
+    }
 
-            // normalize z position
-            Vector3 current_pos = gameObject.transform.position;
-            current_pos.z = 0;
-            gameObject.transform.position = current_pos;
-        }
+    void Update()
+    {
+        move_toward_player();
     }
 }
