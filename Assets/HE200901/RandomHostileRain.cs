@@ -117,7 +117,8 @@ public class RandomHostileRain : MonoBehaviour
 
                 // spawn near player
                 Vector3 portal_position = UnityGameUtility.random_position_on_screen();
-                portal_position.z = -10;
+                portal_position.z = safe_portal_prefab.transform.position.z;
+                // portal_position.z = -10;
                 GameObject safe_portal_obj = ObjectPoolManager.SpawnNewGameObject(safe_portal_prefab, portal_position, Quaternion.identity);
                 GameObject rain_partical_system = GameObject.FindGameObjectWithTag("rain_partical_system");
                 if (rain_partical_system != null)

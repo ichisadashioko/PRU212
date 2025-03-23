@@ -171,13 +171,13 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
             ObjectPoolManager.SpawnNewGameObject(magnet_prefab, dropPosition, Quaternion.identity, ObjectPoolManager.PoolType.RestoreHP);
 
         }
-        else if (random_number < GameState.HP_DROP_RATE)
+        if (random_number < GameState.HP_DROP_RATE)
         {
             if (restore_hp_prefab == null) { restore_hp_prefab = Resources.Load<GameObject>("Life_Fruit_prefab"); }
             if (restore_hp_prefab == null) { return; }
             ObjectPoolManager.SpawnNewGameObject(restore_hp_prefab, dropPosition, Quaternion.identity, ObjectPoolManager.PoolType.RestoreHP);
         }
-        else
+        // else
         {
             if (expPrefab == null) { expPrefab = Resources.Load<GameObject>("duc_exp_prefab"); }
             if (expPrefab == null) { return; }

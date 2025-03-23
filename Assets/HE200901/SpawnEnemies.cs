@@ -75,7 +75,7 @@ public class SpawnEnemies : MonoBehaviour
                 Vector3 spawn_location = random_position_out_of_screen();
                 spawn_location.z = 0;
                 GameObject clone_obj;
-                if (Random.Range(0f, 10f) < 1f)
+                if ((Random.Range(0f, 10f) < 1f) && (GameState.CURRENT_LEVEL > 5))
                 {
                     clone_obj = ObjectPoolManager.SpawnNewGameObject(enemy_prefab_2, spawn_location, Quaternion.identity, ObjectPoolManager.PoolType.Enemies);
                     var _tmp = clone_obj.GetComponent<EnemyFollow>();
