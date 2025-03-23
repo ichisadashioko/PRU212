@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Drawing;
 using TMPro;
-using TMPro.EditorUtilities;
 
 public class TmpDeathOnTouchingBullet : MonoBehaviour
 {

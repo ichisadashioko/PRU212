@@ -15,48 +15,69 @@ public class GUN_PROP
 
     public float Damage { get; set; }
 
+    public static List<GUN_PROP> PREDEFINED_BY_LEVEL = null;
+
+    public static void INIT_PREDEFINED_BY_LEVEL()
+    {
+        GUN_PROP tmp_obj = null;
+        PREDEFINED_BY_LEVEL = new()
+        {
+            new GUN_PROP() { CD = 1f, Count = 1, Damage = 1 },
+            new GUN_PROP() { CD = 0.9f, Count = 1, Damage = 2 },
+            new GUN_PROP() { CD = 0.9f, Count = 2, Damage = 2 },
+            new GUN_PROP() { CD = 0.8f, Count = 2, Damage = 2 },
+            new GUN_PROP() { CD = 0.7f, Count = 2, Damage = 3 },
+            new GUN_PROP() { CD = 0.7f, Count = 3, Damage = 3 },
+            new GUN_PROP() { CD = 0.6f, Count = 3, Damage = 3 },
+            new GUN_PROP() { CD = 0.5f, Count = 4, Damage = 3 },
+            new GUN_PROP() { CD = 0.5f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.5f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.5f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 },
+            new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 }
+        };
+
+        for (int i = 0; i < 40; i++)
+        {
+            tmp_obj = PREDEFINED_BY_LEVEL[PREDEFINED_BY_LEVEL.Count - 1];
+            tmp_obj = new GUN_PROP()
+            {
+                CD = tmp_obj.CD - 0.1f,
+                Count = tmp_obj.Count + 1,
+                Damage = tmp_obj.Damage + 1,
+            };
+
+            tmp_obj.CD = Math.Max(0.2f, tmp_obj.CD);
+            tmp_obj.Count = Math.Min(16, tmp_obj.Count);
+            tmp_obj.Damage = Math.Min(8, tmp_obj.Damage);
+            PREDEFINED_BY_LEVEL.Add(tmp_obj);
+        }
+    }
     public static GUN_PROP GetGunPropByLevel(int level)
     {
-        if (level < 1)
+        if (PREDEFINED_BY_LEVEL == null)
         {
-            return new GUN_PROP() { CD = 1f, Count = 1, Damage = 1 };
+            INIT_PREDEFINED_BY_LEVEL();
         }
-        else if (level < 2)
+
+        if (PREDEFINED_BY_LEVEL.Count == 0)
         {
-            return new GUN_PROP() { CD = 0.9f, Count = 1, Damage = 2 };
+            return new GUN_PROP()
+            {
+                CD = 0.5f,
+                Count = 16,
+                Damage = 2,
+            };
         }
-        else if (level < 3)
-        {
-            return new GUN_PROP() { CD = 0.9f, Count = 2, Damage = 2 };
-        }
-        else if (level < 4)
-        {
-            return new GUN_PROP() { CD = 0.8f, Count = 2, Damage = 2 };
-        }
-        else if (level < 5)
-        {
-            return new GUN_PROP() { CD = 0.7f, Count = 2, Damage = 3 };
-        }
-        else if (level < 6)
-        {
-            return new GUN_PROP() { CD = 0.7f, Count = 3, Damage = 3 };
-        }
-        else if (level < 7)
-        {
-            return new GUN_PROP() { CD = 0.6f, Count = 3, Damage = 3 };
-        }
-        else if (level < 8)
-        {
-            return new GUN_PROP() { CD = 0.5f, Count = 4, Damage = 3 };
-        }
-        else if (level < 9)
-        {
-            return new GUN_PROP() { CD = 0.5f, Count = 4, Damage = 4 };
-        }
-        else
-        {
-            return new GUN_PROP() { CD = 0.4f, Count = 4, Damage = 4 };
-        }
+
+        level = Math.Clamp(level, 0, PREDEFINED_BY_LEVEL.Count - 1);
+        return PREDEFINED_BY_LEVEL[level];
     }
 }
 

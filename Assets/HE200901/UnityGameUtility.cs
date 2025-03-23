@@ -200,6 +200,11 @@ public class SWORD_PROP
                 Damage = tmp_obj.Damage + 1,
                 RotationSpeed = tmp_obj.RotationSpeed + 10f
             };
+
+            tmp_obj.CD = Math.Max(0, tmp_obj.CD);
+            tmp_obj.Count = Math.Min(8, tmp_obj.Count);
+            tmp_obj.Damage = Math.Min(8, tmp_obj.Damage);
+            tmp_obj.RotationSpeed = Math.Min(360, tmp_obj.RotationSpeed);
             PREDEFINED_BY_LEVEL.Add(tmp_obj);
         }
     }
