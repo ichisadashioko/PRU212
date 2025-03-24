@@ -42,7 +42,8 @@ public class CelestialMagnetCollectAllExp : MonoBehaviour
                 GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
                 if (damage_popup_prefab != null)
                 {
-                    var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, player.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    var _damage_popup = ObjectPoolManager.SpawnNewTextGameObject(damage_popup_prefab, player.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    if(_damage_popup != null){
                     var _tmp = _damage_popup.GetComponent<TextMeshPro>();
                     if (_tmp != null)
                     {
@@ -55,6 +56,8 @@ public class CelestialMagnetCollectAllExp : MonoBehaviour
                     if (_fade != null)
                     {
                         _fade.created_time = Time.time;
+                    }
+
                     }
                 }
             }
@@ -75,7 +78,8 @@ public class CelestialMagnetCollectAllExp : MonoBehaviour
                 GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
                 if (damage_popup_prefab != null)
                 {
-                    var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, player.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    var _damage_popup = ObjectPoolManager.SpawnNewTextGameObject(damage_popup_prefab, player.transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    if(_damage_popup != null){
                     var _tmp = _damage_popup.GetComponent<TextMeshPro>();
                     if (_tmp != null)
                     {
@@ -88,6 +92,7 @@ public class CelestialMagnetCollectAllExp : MonoBehaviour
                     if (_fade != null)
                     {
                         _fade.created_time = Time.time;
+                    }
                     }
                 }
             }

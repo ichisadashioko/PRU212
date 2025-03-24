@@ -1,11 +1,39 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObjectPoolManager : MonoBehaviour
 {
     public static List<GameObjectPoolInfo> ALL_OBJECT_POOL_LIST = new List<GameObjectPoolInfo>();
+    public static List<GameObject> ALL_TEXT_OBJECT_LIST = new List<GameObject>();
+    public static int MAX_ALL_TEXT_OBJECT_LIST = 100;
+
+    public static bool check_text_limit()
+    {
+        int active_count = 0;
+        bool has_null = false;
+        foreach (var go in ALL_TEXT_OBJECT_LIST)
+        {
+            if (go == null)
+            {
+                has_null = true;
+                continue;
+            }
+            if (go.activeInHierarchy)
+            {
+                active_count++;
+            }
+        }
+
+        if (has_null)
+        {
+            ALL_TEXT_OBJECT_LIST = ALL_TEXT_OBJECT_LIST.Where(go => go != null).ToList();
+        }
+
+        return (active_count < MAX_ALL_TEXT_OBJECT_LIST);
+    }
 
     public enum PoolType
     {
@@ -35,7 +63,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         var go = ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type];
-        if(go == null)
+        if (go == null)
         {
             go = new GameObject($"{pool_type}_PARENT_GAME_OBJECT");
             ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type] = go;
@@ -48,6 +76,21 @@ public class ObjectPoolManager : MonoBehaviour
 
         go = new GameObject($"{pool_type}_PARENT_GAME_OBJECT");
         ENUM_TO_PARENT_GAME_OBJECT_DICT[pool_type] = go;
+
+        return go;
+    }
+    public static GameObject SpawnNewTextGameObject(GameObject objectToSpawn, Vector3 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None, bool active = true)
+    {
+        if (!check_text_limit())
+        {
+            return null;
+        }
+
+        var go = SpawnNewGameObject(objectToSpawn, spawnPosition, spawnRotation, poolType, active);
+        if (!ALL_TEXT_OBJECT_LIST.Contains(go))
+        {
+            ALL_TEXT_OBJECT_LIST.Add(go);
+        }
 
         return go;
     }

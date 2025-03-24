@@ -83,7 +83,8 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                 GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
                 if (damage_popup_prefab != null)
                 {
-                    var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    var _damage_popup = ObjectPoolManager.SpawnNewTextGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                    if(_damage_popup != null){
                     var _tmp = _damage_popup.GetComponent<TextMeshPro>();
                     if (_tmp != null)
                     {
@@ -96,6 +97,7 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                     if (_fade != null)
                     {
                         _fade.created_time = Time.time;
+                    }
                     }
                 }
 
@@ -120,19 +122,21 @@ public class TmpDeathOnTouchingBullet : MonoBehaviour
                     GameObject damage_popup_prefab = Resources.Load<GameObject>("damage_popup");
                     if (damage_popup_prefab != null)
                     {
-                        var _damage_popup = ObjectPoolManager.SpawnNewGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
-                        var _tmp = _damage_popup.GetComponent<TextMeshPro>();
-                        if (_tmp != null)
-                        {
-                            _tmp.text = $"{gun_prop.Damage}";
-                            //_tmp.color = new UnityEngine.Color(1f, 1f, 0f);
-                            _tmp.color = new Color32(255, 255, 0, 255);
-                            _tmp.faceColor = new Color32(255, 255, 0, 255);
-                        }
-                        var _fade = _damage_popup.GetComponent<DamagePopupFade>();
-                        if (_fade != null)
-                        {
-                            _fade.created_time = Time.time;
+                        var _damage_popup = ObjectPoolManager.SpawnNewTextGameObject(damage_popup_prefab, transform.position, Quaternion.identity, ObjectPoolManager.PoolType.Text);
+                        if(_damage_popup!= null){
+                            var _tmp = _damage_popup.GetComponent<TextMeshPro>();
+                            if (_tmp != null)
+                            {
+                                _tmp.text = $"{gun_prop.Damage}";
+                                //_tmp.color = new UnityEngine.Color(1f, 1f, 0f);
+                                _tmp.color = new Color32(255, 255, 0, 255);
+                                _tmp.faceColor = new Color32(255, 255, 0, 255);
+                            }
+                            var _fade = _damage_popup.GetComponent<DamagePopupFade>();
+                            if (_fade != null)
+                            {
+                                _fade.created_time = Time.time;
+                            }
                         }
                     }
 
