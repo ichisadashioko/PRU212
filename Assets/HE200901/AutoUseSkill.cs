@@ -23,7 +23,7 @@ public class GUN_PROP
         PREDEFINED_BY_LEVEL = new()
         {
             new GUN_PROP() { CD = 1f, Count = 1, Damage = 1 },
-            new GUN_PROP() { CD = 0.9f, Count = 1, Damage = 2 },
+            new GUN_PROP() { CD = 0.9f, Count = 2, Damage = 1 },
             new GUN_PROP() { CD = 0.9f, Count = 2, Damage = 2 },
             new GUN_PROP() { CD = 0.8f, Count = 2, Damage = 2 },
             new GUN_PROP() { CD = 0.7f, Count = 2, Damage = 3 },
@@ -55,7 +55,7 @@ public class GUN_PROP
 
             tmp_obj.CD = Math.Max(0.2f, tmp_obj.CD);
             tmp_obj.Count = Math.Min(16, tmp_obj.Count);
-            tmp_obj.Damage = Math.Min(8, tmp_obj.Damage);
+            // tmp_obj.Damage = Math.Min(8, tmp_obj.Damage);
             PREDEFINED_BY_LEVEL.Add(tmp_obj);
         }
     }

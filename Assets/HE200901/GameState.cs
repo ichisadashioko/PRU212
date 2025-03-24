@@ -6,6 +6,7 @@ public static class GameState
     public static int CURRENT_HP = 100;
     public static readonly int MAX_HP = 100;
     public static int CURRENT_DIFFICULTY = 1;
+    public static int MAX_DIFFICULTY = 1000;
     public static int CURRENT_ACTIVE_ENEMIES_COUNT = 0;
 
     public static int CURRENT_EXP = 0;

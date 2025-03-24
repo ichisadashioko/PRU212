@@ -6,7 +6,7 @@ public class EndGameWhenDie : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     public float update_interval = 1f;

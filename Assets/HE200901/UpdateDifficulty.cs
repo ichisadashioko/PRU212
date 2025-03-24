@@ -18,7 +18,7 @@ public class UpdateDifficulty : MonoBehaviour
         {
             last_update_time_delta = 0;
             GameState.CURRENT_DIFFICULTY++;
-            GameState.CURRENT_DIFFICULTY = (int)Mathf.Min(20, GameState.CURRENT_DIFFICULTY);
+            GameState.CURRENT_DIFFICULTY = (int)Mathf.Min(GameState.MAX_DIFFICULTY, GameState.CURRENT_DIFFICULTY);
         }
     }
 }

@@ -22,6 +22,6 @@ public class RunGame : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }
