@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class InGameUIToolkitUpdateExpStat : MonoBehaviour
 {
+    private Button reduce_difficulty;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,13 +19,18 @@ public class InGameUIToolkitUpdateExpStat : MonoBehaviour
         resume_game_button = _document.rootVisualElement.Q("resume_game_button") as Button;
         pause_game_button = _document.rootVisualElement.Q("pause_game_button") as Button;
         restart_game_button = _document.rootVisualElement.Q("restart_game_button") as Button;
-
+        reduce_difficulty = _document.rootVisualElement.Q("reduce_difficulty") as Button;
         menu_game_button.RegisterCallback<ClickEvent>(menu_game_button_clicked);
         resume_game_button.RegisterCallback<ClickEvent>(toggle_pause_game_button_clicked);
         pause_game_button.RegisterCallback<ClickEvent>(toggle_pause_game_button_clicked);
         restart_game_button.RegisterCallback<ClickEvent>(restart_game_button_clicked);
+        reduce_difficulty.RegisterCallback<ClickEvent>(reduce_difficulty_button_clicked);
     }
-
+    private void reduce_difficulty_button_clicked(ClickEvent evt)
+    {
+        GameState.CURRENT_DIFFICULTY -= 10;
+        GameState.CURRENT_DIFFICULTY = Mathf.Max(0, GameState.CURRENT_DIFFICULTY);
+    }
 
 
     private void menu_game_button_clicked(ClickEvent evt)
