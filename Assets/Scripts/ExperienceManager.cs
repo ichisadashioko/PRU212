@@ -10,10 +10,10 @@ public class ExperienceManager : MonoBehaviour
     [Header("Experience")]
     [SerializeField] AnimationCurve experienceCurve;
 
-    [Header("Interface")]
-    [SerializeField] TextMeshProUGUI levelText;
-    [SerializeField] TextMeshProUGUI experienceText;
-    [SerializeField] Image experienceFill;
+    //[Header("Interface")]
+    //[SerializeField] TextMeshProUGUI levelText;
+    //[SerializeField] TextMeshProUGUI experienceText;
+    //[SerializeField] Image experienceFill;
 
     void Awake()
     {
@@ -36,7 +36,7 @@ public class ExperienceManager : MonoBehaviour
     {
         GameState.CURRENT_EXP += amount;
         CheckForLevelUp();
-        UpdateInterface();
+        //UpdateInterface();
     }
 
     void CheckForLevelUp()
@@ -53,16 +53,16 @@ public class ExperienceManager : MonoBehaviour
     {
         GameState.PREVIOUS_LEVEL_EXP_COUNT = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL);
         GameState.NEXT_LEVEL_EXP_COUNT = (int)experienceCurve.Evaluate(GameState.CURRENT_LEVEL + 1);
-        UpdateInterface();
+        //UpdateInterface();
     }
 
-    void UpdateInterface()
-    {
-        int start = GameState.CURRENT_EXP - GameState.PREVIOUS_LEVEL_EXP_COUNT;
-        int end = GameState.NEXT_LEVEL_EXP_COUNT - GameState.PREVIOUS_LEVEL_EXP_COUNT;
+    //void UpdateInterface()
+    //{
+    //    int start = GameState.CURRENT_EXP - GameState.PREVIOUS_LEVEL_EXP_COUNT;
+    //    int end = GameState.NEXT_LEVEL_EXP_COUNT - GameState.PREVIOUS_LEVEL_EXP_COUNT;
 
-        levelText.text = GameState.CURRENT_LEVEL.ToString();
-        experienceText.text = start + " exp / " + end + " exp";
-        experienceFill.fillAmount = (float)start / (float)end;
-    }
+    //    levelText.text = GameState.CURRENT_LEVEL.ToString();
+    //    experienceText.text = start + " exp / " + end + " exp";
+    //    experienceFill.fillAmount = (float)start / (float)end;
+    //}
 }
