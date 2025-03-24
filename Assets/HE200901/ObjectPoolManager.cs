@@ -8,7 +8,7 @@ public class ObjectPoolManager : MonoBehaviour
 {
     public static List<GameObjectPoolInfo> ALL_OBJECT_POOL_LIST = new List<GameObjectPoolInfo>();
     public static List<GameObject> ALL_TEXT_OBJECT_LIST = new List<GameObject>();
-    public static int MAX_ALL_TEXT_OBJECT_LIST = 100;
+    public static int MAX_ALL_TEXT_OBJECT_LIST = 20;
 
     public static bool check_text_limit()
     {

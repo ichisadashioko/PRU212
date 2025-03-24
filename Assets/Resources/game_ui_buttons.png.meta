@@ -162,6 +162,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -684,7 +697,30 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      game_ui_buttons_0: -7872107155057239937
+      game_ui_buttons_1: 8470118277127886772
+      game_ui_buttons_10: -1295359855143185244
+      game_ui_buttons_11: -3182482760077378136
+      game_ui_buttons_12: 774296094043262592
+      game_ui_buttons_13: -6111657141847770583
+      game_ui_buttons_14: 8557653974847729902
+      game_ui_buttons_15: 5396743387213864718
+      game_ui_buttons_16: -5361940145588159005
+      game_ui_buttons_17: 3816261905365930144
+      game_ui_buttons_18: 2354866686257546068
+      game_ui_buttons_19: -1935542317929981269
+      game_ui_buttons_2: 7800027352522247675
+      game_ui_buttons_20: 4049201339011397611
+      game_ui_buttons_21: -3581238560664246020
+      game_ui_buttons_22: 8289759767018242468
+      game_ui_buttons_3: -7282174394339739262
+      game_ui_buttons_4: -3526308723708540465
+      game_ui_buttons_5: 8417791610896833973
+      game_ui_buttons_6: -7325443691127715725
+      game_ui_buttons_7: -7680482500001819067
+      game_ui_buttons_8: -4542983289075319745
+      game_ui_buttons_9: 5814261559230675093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
