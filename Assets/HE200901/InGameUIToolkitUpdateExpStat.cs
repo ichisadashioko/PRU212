@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class InGameUIToolkitUpdateExpStat : MonoBehaviour
@@ -13,6 +14,48 @@ public class InGameUIToolkitUpdateExpStat : MonoBehaviour
         add_difficulty = _document.rootVisualElement.Q("speed_up_difficulty") as Button;
         add_difficulty.RegisterCallback<ClickEvent>(add_difficulty_button_clicked);
         difficulty_label = _document.rootVisualElement.Q("current_difficulty_label") as Label;
+        menu_game_button = _document.rootVisualElement.Q("menu_game_button") as Button;
+        resume_game_button = _document.rootVisualElement.Q("resume_game_button") as Button;
+        pause_game_button = _document.rootVisualElement.Q("pause_game_button") as Button;
+        restart_game_button = _document.rootVisualElement.Q("restart_game_button") as Button;
+
+        menu_game_button.RegisterCallback<ClickEvent>(menu_game_button_clicked);
+        resume_game_button.RegisterCallback<ClickEvent>(toggle_pause_game_button_clicked);
+        pause_game_button.RegisterCallback<ClickEvent>(toggle_pause_game_button_clicked);
+        restart_game_button.RegisterCallback<ClickEvent>(restart_game_button_clicked);
+    }
+
+
+
+    private void menu_game_button_clicked(ClickEvent evt)
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private bool isPaused = false;
+    private void toggle_pause_game_button_clicked(ClickEvent evt)
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+            pause_game_button.style.display = DisplayStyle.None;
+            resume_game_button.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pause_game_button.style.display = DisplayStyle.Flex;
+            resume_game_button.style.display = DisplayStyle.None;
+        }
+    }
+    private void restart_game_button_clicked(ClickEvent evt)
+    {
+        Debug.Log("Restarting game...");
+        Time.timeScale = 1;
+        GameState.reset_game_state();
+        SceneManager.LoadScene(1);
     }
 
     private void add_difficulty_button_clicked(ClickEvent evt)
@@ -26,6 +69,10 @@ public class InGameUIToolkitUpdateExpStat : MonoBehaviour
     private Label exp_stat_label;
     private Label difficulty_label;
     private Button add_difficulty;
+    private Button menu_game_button;
+    private Button resume_game_button;
+    private Button pause_game_button;
+    private Button restart_game_button;
     // Update is called once per frame
     void Update()
     {
